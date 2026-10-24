@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "path": "reframework/API.h",
+      "url": "https://raw.githubusercontent.com/praydog/REFramework/d052e8fd3fd41d0a1a33394fcf6e6c19be39b1ee/include/reframework/API.h",
+      "sha256": "73da3d6e1c81d066d97ac638f91c715e3561d00dba1e4585bc22ae4442f88946"
+    },
+    {
+      "path": "lua-5.4.3.tar.gz",
+      "url": "https://www.lua.org/ftp/lua-5.4.3.tar.gz",
+      "sha256": "f8612276169e3bfcbcfb8f226195bfc6e466fe13042f1076cbde92b7ec96bbfb"
+    }
+  ],
+  "deferred_minhook": {
+    "commit": "c3fcafdc10146beb5919319d0683e44e3c30d537",
+    "note": "Not downloaded or linked before verified RE8 hook sites exist."
+  }
+}

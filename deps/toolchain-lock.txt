@@ -1,0 +1,15 @@
+Target: Windows x86_64 PE32+, C11, MinGW-w64 POSIX GCC
+Host CI image: ubuntu-24.04
+Host verification compiler: GCC 13
+Windows compiler: x86_64-w64-mingw32-gcc-posix
+Actual compiler version and source hashes are written to build/manifest.json.
+This foundation build does not claim bit-for-bit binary reproducibility or game support.
+
+Observed in successful CI run 40074607011 (2026-10-24), now pinned in CI:
+gcc-mingw-w64-x86-64-posix = 13.2.0-6ubuntu1+26.1
+gcc-mingw-w64-x86-64-posix-runtime = 13.2.0-6ubuntu1+26.1
+gcc-mingw-w64-base = 13.2.0-6ubuntu1+26.1
+binutils-mingw-w64-x86-64 = 2.41.90.20240122-1ubuntu1+11.4
+mingw-w64-common = 11.0.1-3build1
+mingw-w64-x86-64-dev = 11.0.1-3build1
+The host GCC/Python/runner image remain CI-managed; binary bit reproducibility is unclaimed.

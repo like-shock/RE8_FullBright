@@ -1,0 +1,8 @@
+/build/
+/dist/
+/private/
+/.superpowers/
+/.worktrees/
+__pycache__/
+*.pyc
+*.jsonl
