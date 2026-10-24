@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     inputs=[]
-    for directory in ['src','scripts','deps','tools']:
+    for directory in ['src','scripts','deps','tools','profiles']:
         inputs.extend(p for p in (ROOT/directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
     manifest={
         'schema':1, 'stage':'foundation', 'supported_profiles':0,

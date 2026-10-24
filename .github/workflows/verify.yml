@@ -18,7 +18,12 @@ jobs:
       - name: Install compilers
         run: |
           sudo apt-get update -qq
-          sudo apt-get install --no-install-recommends -y gcc gcc-mingw-w64-x86-64-posix binutils-mingw-w64-x86-64 python3
+          sudo apt-get install --no-install-recommends -y gcc python3 \
+            gcc-mingw-w64-x86-64-posix=13.2.0-6ubuntu1+26.1 \
+            gcc-mingw-w64-x86-64-posix-runtime=13.2.0-6ubuntu1+26.1 \
+            gcc-mingw-w64-base=13.2.0-6ubuntu1+26.1 \
+            binutils-mingw-w64-x86-64=2.41.90.20240122-1ubuntu1+11.4 \
+            mingw-w64-common=11.0.1-3build1 mingw-w64-x86-64-dev=11.0.1-3build1
       - name: Verify pinned inputs
         run: python3 tools/fetch_deps.py
       - name: Build Windows DLL

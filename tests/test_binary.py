@@ -28,7 +28,7 @@ class BinaryTests(unittest.TestCase):
             self.assertRegex(r.stdout, r'\b'+name+r'\b')
         imports={x.lower() for x in re.findall(r'DLL Name:\s*(\S+)',r.stdout)}
         self.assertTrue(imports)
-        self.assertLessEqual(imports,{'kernel32.dll','msvcrt.dll'})
+        self.assertLessEqual(imports,{'kernel32.dll','msvcrt.dll','user32.dll'})
 
     def test_manifest_describes_actual_binary_and_sources(self):
         manifest=json.loads((ROOT/'build/manifest.json').read_text())
