@@ -30,10 +30,20 @@ def fetch():
         verify_file(dest,item['sha256'])
     archive=cache/'lua-5.4.3.tar.gz'
     with tarfile.open(fileobj=io.BytesIO(archive.read_bytes()),mode='r:gz') as tar:
+        members=[]
         for member in tar.getmembers():
             path=Path(member.name)
             if not (member.isfile() and len(path.parts)==3 and path.parts[:2]==('lua-5.4.3','src')
                     and path.suffix in {'.c','.h'}): continue
+            members.append(member)
+        expected={cache/member.name for member in members}
+        source_dir=cache/'lua-5.4.3/src'
+        unexpected=sorted(p for p in source_dir.rglob('*')
+                          if p.suffix in {'.c','.h'} and p not in expected)
+        if unexpected:
+            raise ValueError(f'Unexpected cached Lua source: {unexpected[0]}; remove it explicitly before building')
+        for member in members:
+            path=Path(member.name)
             data=tar.extractfile(member).read()
             dest=cache/path
             if dest.exists():
