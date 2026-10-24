@@ -1,0 +1,41 @@
+name: Native foundation verification
+on:
+  push:
+    branches: [main, 'feature/**', 'research/**']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install compilers
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --no-install-recommends -y gcc gcc-mingw-w64-x86-64-posix binutils-mingw-w64-x86-64 python3
+      - name: Verify pinned inputs
+        run: python3 tools/fetch_deps.py
+      - name: Build Windows DLL
+        run: bash scripts/build.sh
+      - name: Run host and required binary checks
+        env:
+          FB_REQUIRE_BINARY: '1'
+        run: bash scripts/test.sh
+      - name: Record toolchain versions
+        run: dpkg-query -W gcc gcc-mingw-w64-x86-64-posix binutils-mingw-w64-x86-64 mingw-w64-x86-64-dev > build/toolchain-packages.txt
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: native-foundation-${{ github.sha }}
+          path: |
+            build/RE8_FullBright.dll
+            build/manifest.json
+            build/compiler.txt
+            build/toolchain-packages.txt
+          if-no-files-found: error
+          retention-days: 14

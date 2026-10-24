@@ -1,0 +1,7 @@
+Target: Windows x86_64 PE32+, C11, MinGW-w64 POSIX GCC
+Host CI image: ubuntu-24.04
+Host verification compiler: GCC 13
+Windows compiler: x86_64-w64-mingw32-gcc-posix
+Actual compiler version and source hashes are written to build/manifest.json.
+Exact compiler package versions will be captured from the first successful CI build.
+This foundation build does not claim bit-for-bit binary reproducibility or game support.
